@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// In-memory storage for URLs
+// In-memory storage
 const urlDatabase = {};
 
 // API to shorten URL
@@ -17,9 +17,7 @@ app.post("/shorten", (req, res) => {
     }
     const shortCode = shortid.generate();
     urlDatabase[shortCode] = longUrl;
-
-    // Dynamic base URL
-    const shortUrl = `${req.protocol}://${req.get('host')}/${shortCode}`;
+    const shortUrl = `https://day-6-cw.vercel.app/${shortCode}`;
     res.json({ shortUrl });
 });
 
@@ -34,11 +32,7 @@ app.get("/:shortCode", (req, res) => {
     }
 });
 
-// Serve UI
-app.use(express.static("public"));
-
-// Start server
-const PORT = process.env.PORT || 3000; // Ensure compatibility with Vercel's dynamic ports
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
