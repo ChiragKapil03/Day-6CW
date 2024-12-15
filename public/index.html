@@ -24,7 +24,7 @@
       resultDiv.textContent = 'Processing...';
 
       try {
-        const response = await fetch('https://day-6-cw.vercel.app/shorten', {
+        const response = await fetch('https://day-6-cw.vercel.app/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ longUrl })
